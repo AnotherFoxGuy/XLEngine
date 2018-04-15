@@ -1,95 +1,116 @@
 # XLEngine
 
-## TODO
-* game plugin fix-ups
+![GitHub issues](https://img.shields.io/github/issues/Mindwerks/XLEngine.svg?style=flat-square)
+![issues-pr](https://img.shields.io/github/issues-pr/Mindwerks/XLEngine.svg?style=flat-square)
+![downloads](https://img.shields.io/github/downloads/Mindwerks/XLEngine/latest/total.svg?style=flat-square)
+![release](https://img.shields.io/github/release/Mindwerks/XLEngine.svg?style=flat-square)
+![commits since latest release](https://img.shields.io/github/commits-since/Mindwerks/XLEngine/latest.svg?style=flat-square)
+![contributors](https://img.shields.io/github/contributors/Mindwerks/XLEngine.svg?style=flat-square)
+
+| Build status |                                                                                                                                                              |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Linux:       | [![travis build Status](https://img.shields.io/travis/Mindwerks/XLEngine.svg?style=flat-square)](https://travis-ci.org/Mindwerks/XLEngine)                   |
+| Windows:     | [![appveyor build Status](https://img.shields.io/appveyor/ci/psi29a/xlengine/master.svg?style=flat-square)](https://ci.appveyor.com/project/psi29a/xlengine) |
 
 ## Dependencies
-* DevIL Cross-platform image loading and manipulation toolkit
-* enet Thin network communication layer on top of UDP
-* GLEW OpenGL Extension Wrangler Library
-* SDL2 Cross-platform low-level I/O access
-* cmake
+
+-   DevIL: Cross-platform image loading and manipulation toolkit
+-   enet: Thin network communication layer on top of UDP
+-   GLEW: OpenGL Extension Wrangler Library
+-   SDL2: Cross-platform low-level I/O access
+-   CMake: cross-platform build system.
 
 ### Install the dependencies on Linux:
+
 ```bash
 sudo apt install libdevil-dev libenet-dev libglew-dev libsdl2-dev
 ```
 
 ### Install the dependencies on Windows with [vcpkg](https://docs.microsoft.com/en-us/cpp/vcpkg):
+
 ```bash
 vcpkg install devil enet glew sdl2
 ```
 
 ## Building
+
 We use CMake as the cross-platform build system.
 
 ### Building on Linux:
+
 ```bash
 git checkout https://github.com/Mindwerks/XLEngine.git
 mkdir build; cd build; cmake ../XLEngine; make -j4
 ```
 
 ### Building on Windows:
-(Replace ```< Location of vcpkg >``` with the location where you installed vcpkg)
+
+(Replace `< Location of vcpkg >` with the location where you installed vcpkg)
+
 ```bash
 git checkout https://github.com/Mindwerks/XLEngine.git
 mkdir build && cd build && cmake -DCMAKE_TOOLCHAIN_FILE=< Location of vcpkg >\scripts\buildsystems\vcpkg.cmake ../XLEngine
 ```
 
 ## Runtime Configuration
+
 Game data paths and render settings are specified in XLEngine.conf. On non-
 Windows systems, it will look for this in the XDG standard directory:
-```
-$XDG_CONFIG_HOME/XLEngine/XLEngine.conf
-```
+
+    $XDG_CONFIG_HOME/XLEngine/XLEngine.conf
+
 or, if `XDG_CONFIG_HOME` is unset or empty:
-```
-$HOME/.config/XLEngine/XLEngine.conf
-```
+
+    $HOME/.config/XLEngine/XLEngine.conf
 
 On all systems, it will then search for XLEngine.conf in the process's working
 directory and use the settings there as overrides.
 
 The available settings are:
-```
-[general]
-width = # window/screen width, 320 minimum
-height = # window/screen height, 200 minimum
-fullscreen = # true or false
-vsync = # true or false
-emulate-low-res = # true to render at 320x200 and stretch to fit, or false
-renderer = # opengl, soft32 (true-color software), soft8 (paletted software)
 
-[DaggerXL]
-data-path = # Full path to game data, e.g. C:\DAGGER\ARENA2
+    [general]
+    width = # window/screen width, 320 minimum
+    height = # window/screen height, 200 minimum
+    fullscreen = # true or false
+    vsync = # true or false
+    emulate-low-res = # true to render at 320x200 and stretch to fit, or false
+    renderer = # opengl, soft32 (true-color software), soft8 (paletted software)
 
-[DarkXL]
-data-path = # ...
+    [DaggerXL]
+    data-path = # Full path to game data, e.g. C:\DAGGER\ARENA2
 
-[BloodXL]
-data-path = # ...
+    [DarkXL]
+    data-path = # ...
 
-[OutlawsXL]
-data-path = # ...
-```
+    [BloodXL]
+    data-path = # ...
+
+    [OutlawsXL]
+    data-path = # ...
 
 Currently the game must be run from where it can find the DarkXL/, DaggerXL/,
 etc. directories, where the AngelScript (\*.as) and image (\*.png) files are for
 the respective games. Just copy the contents of the resources/ directory to your build directory.
 
+## TODO
+
+-   game plugin fix-ups
+
 ## Changelog
 
 ### 0.2.0
-* dos2unix all files
-* PlatformDef magic with macros
-* bare minimum fixes to compile on linux with gcc
-* added cross-platform cmake build system
-* re-added angelscript external dep
+
+-   dos2unix all files
+-   PlatformDef magic with macros
+-   bare minimum fixes to compile on linux with gcc
+-   added cross-platform cmake build system
+-   re-added angelscript external dep
 
 ### 0.1.0 Initial Release
-* LuciusDXL code drop from 2011-07-12 09:24:47 +0200 (Tue, 12 Jul 2011)
-* LuciusDXL licensed code under the Expat License (aka MIT License)
-* Original LuciusDXL release will be included in 0.1.0 tagged release
-* Added README.md
-* Removed 3rd-party libs (will add back as necessary)
-* Removed binaries and MSVC related files
+
+-   LuciusDXL code drop from 2011-07-12 09:24:47 +0200 (Tue, 12 Jul 2011)
+-   LuciusDXL licensed code under the Expat License (aka MIT License)
+-   Original LuciusDXL release will be included in 0.1.0 tagged release
+-   Added README.md
+-   Removed 3rd-party libs (will add back as necessary)
+-   Removed binaries and MSVC related files
